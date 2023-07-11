@@ -4,9 +4,9 @@
 
 DNSOP Working Group                                         P. Thomassen
 Internet-Draft                                                deSEC, SSE
-Updates: 4035, 6840, 8624 (if approved)                     11 July 2023
-Intended status: Standards Track                                        
-Expires: 12 January 2024
+Updates: 4035, 6840, 8624 (if approved)                      V. Dukhovni
+Intended status: Standards Track                              Google LLC
+Expires: 12 January 2024                                    11 July 2023
 
 
                   DNSSEC Multi-Algorithm Requirements
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomassen                Expires 12 January 2024                [Page 1]
+Thomassen & Dukhovni     Expires 12 January 2024                [Page 1]
 
 Internet-Draft                  multialgo                      July 2023
 
@@ -85,7 +85,7 @@ Table of Contents
      A.1.  Signing Requirements  . . . . . . . . . . . . . . . . . .   8
      A.2.  Validator Requirements  . . . . . . . . . . . . . . . . .   9
    Appendix B.  Change History (to be removed before publication)  .  10
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  10
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  10
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomassen                Expires 12 January 2024                [Page 2]
+Thomassen & Dukhovni     Expires 12 January 2024                [Page 2]
 
 Internet-Draft                  multialgo                      July 2023
 
@@ -165,7 +165,7 @@ Internet-Draft                  multialgo                      July 2023
 
 
 
-Thomassen                Expires 12 January 2024                [Page 3]
+Thomassen & Dukhovni     Expires 12 January 2024                [Page 3]
 
 Internet-Draft                  multialgo                      July 2023
 
@@ -221,7 +221,7 @@ Internet-Draft                  multialgo                      July 2023
 
 
 
-Thomassen                Expires 12 January 2024                [Page 4]
+Thomassen & Dukhovni     Expires 12 January 2024                [Page 4]
 
 Internet-Draft                  multialgo                      July 2023
 
@@ -277,7 +277,7 @@ Internet-Draft                  multialgo                      July 2023
 
 
 
-Thomassen                Expires 12 January 2024                [Page 5]
+Thomassen & Dukhovni     Expires 12 January 2024                [Page 5]
 
 Internet-Draft                  multialgo                      July 2023
 
@@ -333,7 +333,7 @@ Internet-Draft                  multialgo                      July 2023
 
 
 
-Thomassen                Expires 12 January 2024                [Page 6]
+Thomassen & Dukhovni     Expires 12 January 2024                [Page 6]
 
 Internet-Draft                  multialgo                      July 2023
 
@@ -371,11 +371,10 @@ Internet-Draft                  multialgo                      July 2023
 
 5.  Acknowledgments
 
-   The author would like to thank Shumon Huque and Viktor Dukhovni for
-   early feedback on this proposal.  It was developed after discussions
-   on the problem space with Edward Lewis, Jakob Schlyter, Johan
-   Stenstam, Steve Crocker, whose contributions where both insightful
-   and helpful.
+   The author would like to thank Shumon Huque for early feedback on
+   this proposal.  It was developed after discussions on the problem
+   space with Edward Lewis, Jakob Schlyter, Johan Stenstam, Steve
+   Crocker, whose contributions where both insightful and helpful.
 
 6.  Normative References
 
@@ -389,7 +388,8 @@ Internet-Draft                  multialgo                      July 2023
 
 
 
-Thomassen                Expires 12 January 2024                [Page 7]
+
+Thomassen & Dukhovni     Expires 12 January 2024                [Page 7]
 
 Internet-Draft                  multialgo                      July 2023
 
@@ -445,7 +445,7 @@ A.1.  Signing Requirements
 
 
 
-Thomassen                Expires 12 January 2024                [Page 8]
+Thomassen & Dukhovni     Expires 12 January 2024                [Page 8]
 
 Internet-Draft                  multialgo                      July 2023
 
@@ -501,7 +501,7 @@ A.2.  Validator Requirements
 
 
 
-Thomassen                Expires 12 January 2024                [Page 9]
+Thomassen & Dukhovni     Expires 12 January 2024                [Page 9]
 
 Internet-Draft                  multialgo                      July 2023
 
@@ -523,11 +523,13 @@ Appendix B.  Change History (to be removed before publication)
 
    *  draft-thomassen-dnsop-multialgo-01
 
+   |  Add Viktor
+
    *  draft-thomassen-dnsop-multialgo-00
 
    |  Initial public draft.
 
-Author's Address
+Authors' Addresses
 
    Peter Thomassen
    deSEC, SSE
@@ -536,6 +538,9 @@ Author's Address
    Email: peter@desec.io
 
 
+   Viktor Dukhovni
+   Google LLC
+   Email: ietf-dane@dukhovni.org
 
 
 
@@ -552,9 +557,4 @@ Author's Address
 
 
 
-
-
-
-
-
-Thomassen                Expires 12 January 2024               [Page 10]
+Thomassen & Dukhovni     Expires 12 January 2024               [Page 10]

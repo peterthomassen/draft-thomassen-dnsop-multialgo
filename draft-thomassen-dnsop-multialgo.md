@@ -25,6 +25,14 @@ organization = "deSEC, SSE"
 [author.address.postal]
  city = "Berlin"
  country = "Germany"
+
+[[author]]
+initials = "V."
+surname = "Dukhovni"
+fullname = "Viktor Dukhovni"
+organization = "Google LLC"
+[author.address]
+ email = "ietf-dane@dukhovni.org"
 %%%
 
 
@@ -265,10 +273,10 @@ algorithm is dropped.
 
 # Acknowledgments
 
-The author would like to thank Shumon Huque and Viktor Dukhovni for early
-feedback on this proposal. It was developed after discussions on the problem
-space with Edward Lewis, Jakob Schlyter, Johan Stenstam, Steve Crocker, whose
-contributions where both insightful and helpful.
+The author would like to thank Shumon Huque for early feedback on this proposal.
+It was developed after discussions on the problem space with Edward Lewis, Jakob
+Schlyter, Johan Stenstam, Steve Crocker, whose contributions where both
+insightful and helpful.
 
 
 {backmatter}
@@ -341,6 +349,8 @@ less stringent signing and slightly modified validation rules (see above).
 # Change History (to be removed before publication)
 
 * draft-thomassen-dnsop-multialgo-01
+
+> Add Viktor
 
 * draft-thomassen-dnsop-multialgo-00
 

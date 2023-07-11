@@ -6,6 +6,7 @@
 <meta content="initial-scale=1.0" name="viewport">
 <title>DNSSEC Multi-Algorithm Requirements</title>
 <meta content="Peter Thomassen" name="author">
+<meta content="Viktor Dukhovni" name="author">
 <meta content="
        This document restates the requirements on DNSSEC signing and validation and
 makes small adjustments order to allow for more flexible handling of
@@ -1183,7 +1184,7 @@ li > p:last-of-type {
 <td class="right">July 2023</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Thomassen</td>
+<td class="left">Thomassen &amp; Dukhovni</td>
 <td class="center">Expires 12 January 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
@@ -1206,11 +1207,15 @@ li > p:last-of-type {
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
 <dd class="expires"><time datetime="2024-01-12">12 January 2024</time></dd>
-<dt class="label-authors">Author:</dt>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">P. Thomassen</div>
 <div class="org">deSEC, SSE</div>
+</div>
+<div class="author">
+      <div class="author-name">V. Dukhovni</div>
+<div class="org">Google LLC</div>
 </div>
 </dd>
 </dl>
@@ -1332,7 +1337,7 @@ preparation for an algorithm rollover, such as of the root zone.<a href="#sectio
             <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="xref">Appendix B</a>.  <a href="#name-change-history-to-be-remove" class="xref">Change History (to be removed before publication)</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-C" class="xref"></a><a href="#name-authors-address" class="xref">Author's Address</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-C" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1598,10 +1603,10 @@ algorithm is dropped.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
       <h2 id="name-acknowledgments">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-5-1">The author would like to thank Shumon Huque and Viktor Dukhovni for early
-feedback on this proposal. It was developed after discussions on the problem
-space with Edward Lewis, Jakob Schlyter, Johan Stenstam, Steve Crocker, whose
-contributions where both insightful and helpful.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">The author would like to thank Shumon Huque for early feedback on this proposal.
+It was developed after discussions on the problem space with Edward Lewis, Jakob
+Schlyter, Johan Stenstam, Steve Crocker, whose contributions where both
+insightful and helpful.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-6">
@@ -1728,22 +1733,25 @@ less stringent signing and slightly modified validation rules (see above).<a hre
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-change-history-to-be-remove" class="section-name selfRef">Change History (to be removed before publication)</a>
       </h2>
 <ul class="normal">
-<li class="normal" id="appendix-B-1.1">
-          <p id="appendix-B-1.1.1">draft-thomassen-dnsop-multialgo-01<a href="#appendix-B-1.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-B-1.2">
-          <p id="appendix-B-1.2.1">draft-thomassen-dnsop-multialgo-00<a href="#appendix-B-1.2.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B-1.1">draft-thomassen-dnsop-multialgo-01<a href="#appendix-B-1.1" class="pilcrow">¶</a>
 </li>
       </ul>
 <blockquote id="appendix-B-2">
-        <p id="appendix-B-2.1">Initial public draft.<a href="#appendix-B-2.1" class="pilcrow">¶</a></p>
+        <p id="appendix-B-2.1">Add Viktor<a href="#appendix-B-2.1" class="pilcrow">¶</a></p>
+</blockquote>
+<ul class="normal">
+<li class="normal" id="appendix-B-3.1">draft-thomassen-dnsop-multialgo-00<a href="#appendix-B-3.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+<blockquote id="appendix-B-4">
+        <p id="appendix-B-4.1">Initial public draft.<a href="#appendix-B-4.1" class="pilcrow">¶</a></p>
 </blockquote>
 </section>
 </div>
 <div id="authors-addresses">
 <section id="appendix-C">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Peter Thomassen</span></div>
@@ -1753,6 +1761,14 @@ less stringent signing and slightly modified validation rules (see above).<a hre
 <div class="email">
 <span>Email:</span>
 <a href="mailto:peter@desec.io" class="email">peter@desec.io</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Viktor Dukhovni</span></div>
+<div dir="auto" class="left"><span class="org">Google LLC</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:ietf-dane@dukhovni.org" class="email">ietf-dane@dukhovni.org</a>
 </div>
 </address>
 </section>
