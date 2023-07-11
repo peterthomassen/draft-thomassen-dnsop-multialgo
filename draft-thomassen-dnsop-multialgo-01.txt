@@ -15,7 +15,7 @@ Expires: 12 January 2024                                    11 July 2023
 Abstract
 
    This document restates the requirements on DNSSEC signing and
-   validation and makes small adjustments order to allow for more
+   validation and makes small adjustments in order to allow for more
    flexible handling of configurations that advertise multiple Secure
    Entry Points (SEP) with different signing algorithms via their DS
    record or trust anchor set.  The adjusted rules allow both for multi-
@@ -356,7 +356,7 @@ Internet-Draft                  multialgo                      July 2023
    would have been premature.  Determining universal support cannot be
    solved on the protocol level, and it is the community's
    responsibility to only advance an algorithm to UNIVERSAL if safe
-   enough, i.e. if the number of resolvers lacking support it is deemed
+   enough, i.e. if the number of resolvers lacking support is deemed
    negligible.
 
    In any case, regardless of "who moves first", resolution is never
@@ -523,6 +523,8 @@ Appendix B.  Change History (to be removed before publication)
 
    *  draft-thomassen-dnsop-multialgo-01
 
+   |  Editorial changes
+   |  
    |  Add Viktor
 
    *  draft-thomassen-dnsop-multialgo-00
@@ -541,8 +543,6 @@ Authors' Addresses
    Viktor Dukhovni
    Google LLC
    Email: ietf-dane@dukhovni.org
-
-
 
 
 

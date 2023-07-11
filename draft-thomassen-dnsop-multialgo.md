@@ -39,7 +39,7 @@ organization = "Google LLC"
 .# Abstract
 
 This document restates the requirements on DNSSEC signing and validation and
-makes small adjustments order to allow for more flexible handling of
+makes small adjustments in order to allow for more flexible handling of
 configurations that advertise multiple Secure Entry Points (SEP) with different
 signing algorithms via their DS record or trust anchor set.
 The adjusted rules allow both for multi-signer operation and for transfer of
@@ -259,7 +259,7 @@ resolver; however, in that case labeling the algorithm as UNIVERSAL would
 have been premature.  Determining universal support cannot be solved on
 the protocol level, and it is the community's responsibility to only
 advance an algorithm to UNIVERSAL if safe enough, i.e. if the
-number of resolvers lacking support it is deemed negligible.
+number of resolvers lacking support is deemed negligible.
 
 In any case, regardless of "who moves first", resolution is never
 disrupted, and changes to the set of UNIVERSAL algorithms do not
@@ -349,6 +349,8 @@ less stringent signing and slightly modified validation rules (see above).
 # Change History (to be removed before publication)
 
 * draft-thomassen-dnsop-multialgo-01
+
+> Editorial changes
 
 > Add Viktor
 
