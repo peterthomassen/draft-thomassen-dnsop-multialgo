@@ -340,6 +340,8 @@ less stringent signing and slightly modified validation rules (see above).
 
 # Change History (to be removed before publication)
 
+* draft-thomassen-dnsop-multialgo-01
+
 * draft-thomassen-dnsop-multialgo-00
 
 > Initial public draft.

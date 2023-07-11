@@ -1,4 +1,4 @@
-VERSION = 00
+VERSION = 01
 DOCNAME = draft-thomassen-dnsop-multialgo
 today := $(shell TZ=UTC date +%Y-%m-%dT00:00:00Z)
 
