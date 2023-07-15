@@ -86,13 +86,21 @@ via its trust anchors. This poses a problem for (at least) the following cases:
     and SSR costs, it seems desirable to find a way for publishing the new trust
     anchor without introducing the new algorithm into the zone just yet.
 
+<!-- Viktor: What is an "SSR cost"? -->
+
 For a more detailed explanation of the implications of the current rules as well
 as of alternative solution approaches, see (#oldrules).
 
-However, it turns out that these limitations are not fundamental to the
-construction of the DNS and DNSSEC protocols, but appear as consequences of the
-current requirements, which (in this very strict form) are not necessary for
-origin validation.
+The existing signing requirements, that give rise to the above limitations, are
+well motivated.  They ensure the downgrade-resistance of DNSSEC when only some,
+but not all, of a zone's DS RRset or trust anchor set DNSKEY algorithms are
+supported by a validating resolver.
+
+When a zone's DS RRset or trust anchor set includes multiple DNSKEY algorithms,
+an attacker who can strip all the supported RRSIGs from a signed response from
+that zone, leaving just the unsupported signatures, must not be able to
+disable validation for that zone, effectively downgrading the zone to
+"insecure".
 
 This document explores how the signing and validation rules can be modified to
 accommodate additional use cases, without compromising on the security
@@ -107,13 +115,13 @@ capitals, as shown here.
 
 # Proposed Updates to RFCs
 
-The heart of the issue is that even though one signature, in theory, will
-suffice for validation, the signer cannot, in the general case, know which
+The heart of the issue is that even though any one acceptable signature 
+suffices for validation, the signer cannot, in the general case, know which
 particular signing algorithm(s) the validator will support -- and hence,
 providing a "large enough set" (read: all of them) is the approach that had
 been taken so far.
 
-A more relaxed approach is defined which does not require all algorithms'
+This document presents a more relaxed approach which does not require all algorithms'
 RRSIGs to be present, while ensuring that the set of signatures provided is
 still "large enough" for reliable DNSSEC operation, so that glitch-free
 multi-signer operation and TA pre-publication are made possible.
@@ -125,7 +133,6 @@ algorithms (such as 8 and 13), the scheme requires only one of the
 two signatures.  Similarly, when pre-publishing a trust anchor,
 associated signatures don't need to be published immediately,
 provided that the existing TA's algorithm is generally supported.
-
 
 ## Updates to RFC 8624
 
@@ -157,9 +164,9 @@ The following algorithms are thus INSECURE: 1, 3, 5, 6, 7, 12
 
 ## Signing Requirements
 
- 1. Signers must sign with at least one UNIVERSAL algorithm if any
-    are present in the DS RRset or trust anchor set.  Other
-    signatures are OPTIONAL.
+ 1. Signers must sign with at least one UNIVERSAL algorithm if at
+    least one UNIVERSAL algorithm is present in the DS RRset or trust
+    anchor set.  Other signatures are OPTIONAL.
 
  2. Absent any UNIVERSAL algorithms in the DS RRset or trust anchor
     set, signers MUST sign with all algorithm listed.
@@ -167,15 +174,20 @@ The following algorithms are thus INSECURE: 1, 3, 5, 6, 7, 12
 ## Validator Requirements
 
  1. When the DS RRset or trust anchor set for a zone includes an
-    unsupported INSECURE algorithm, validators MUST treat the zone as
-    unsigned, even if signed with another supported algorithm.
+    unsupported INSECURE algorithm, validators MUST be willing to treat the
+    zone as unsigned, even if the DS RRset or trust anchor set lists another
+    supported algorithm.  More specifically, unvalidated responses bearing
+    just the unsupported RRSIGs MUST be accepted as valid "insecure" responses.
+    Response RRsets with supported signatures SHOULD still be validated.
 
  2. Otherwise, validators MUST accept any valid path.
 
 Implementing these rules requires validating resolvers to keep a record of
 INSECURE algorithms (e.g. via a static array of INSECURE algorithm numbers), so
 that the zone's security status can be established upon inspection of a DS
-record or TA set.
+record or TA set.  Any otherwise supported algorithms that are disabled by the
+resolver operator as a matter of local policy MUST also be considered
+"INSECURE".
 
 ## Discussion
 
@@ -197,12 +209,25 @@ provide a valid path everywhere.
 
 When a UNIVERSAL algorithm is in use, signatures of other algorithms are not
 required. DNS providers are thus free to introduce additional (non-INSECURE)
-algorithms without coercing other participating providers to do the same.
+algorithms without forcing other participating providers to do the same.
 
 For zones with trust anchors, when there is a trust anchor with a UNIVERSAL
 algorithm, it is permissible to introduce a new trust anchor for a different
 algorithm before introducing the corresponding DNSKEY and RRSIGs into the zone.
 (Of course, they need to be added before the old trust anchor is removed.)
+
+If the added trust anchor is also for a UNIVERSAL algorithm, it is permissible
+to eventually switch to returning just the RRSIGs for the new algorithm, without
+an intermediate dual-signing period.  If the new trust anchor is not yet UNIVERSAL,
+a dual signing period is required in order to complete the algorithm rollover.
+
+In most cases, particularly in the case of the root zone, both algorithms will
+be UNIVERSAL.  In a hypothetical emergency situation where only the new
+algorithm is UNIVERSAL and the old was just downgraded to INSECURE, the new
+signatures would need to be introduced immediately.  A short dual signing
+period would then be required for continuity.  Resolvers would be expected to
+defer disabling the old algorithm until after the root zone rollover is
+completed.
 
 # IANA Considerations
 
@@ -250,20 +275,25 @@ use the INSECURE algorithm, it will continue to fully validate with
 supporting resolvers, while non-supporting resolvers will treat the
 zone as insecure until the algorithm is replaced.
 
-Conversely, when an algorithm is added to the set of UNIVERSAL ones,
-it is conceivable that a signer may move to this algorithm before all
-validators are upgraded.  This is, in fact, not a problem, as
-resolvers do not need to know the concept of UNIVERSAL.  A problem
-could only occur if the corresponding RRSIG was not supported by the
-resolver; however, in that case labeling the algorithm as UNIVERSAL would
-have been premature.  Determining universal support cannot be solved on
-the protocol level, and it is the community's responsibility to only
-advance an algorithm to UNIVERSAL if safe enough, i.e. if the
-number of resolvers lacking support is deemed negligible.
+Conversely, when an algorithm is added to the set of UNIVERSAL ones, signers
+MAY begin to return signatures for just that algorithm.  This is, in fact, not
+a problem, as resolvers do not need to know the concept of UNIVERSAL, they just
+need to support that algorithm (or in less typically explicitly classify it as
+INSECURE).  A problem could only occur if the corresponding RRSIG was not
+supported by a non-negligible population of resolvers; however, in that case
+labeling the algorithm as UNIVERSAL would have been premature.  Determining
+universal support cannot be solved on the protocol level, and it is the
+community's responsibility to only advance an algorithm to UNIVERSAL when safe
+enough, i.e. when the population of resolvers lacking support is deemed negligible.
 
-In any case, regardless of "who moves first", resolution is never
+<!-- In any case, regardless of "who moves first", resolution is never
 disrupted, and changes to the set of UNIVERSAL algorithms do not
 trigger overly conservative SERVFAIL responses.
+
+Viktor:  This is not true.  If algorithms are prematurely deemed UNIVERSAL by
+signers, and are not yet universall supported by resolvers, problems are sure
+to happen.
+-->
 
 Resolvers dropping support for INSECURE algorithms (e.g. 7) without
 implementing this specification will produce SERVFAIL responses for
@@ -277,7 +307,6 @@ The author would like to thank Shumon Huque for early feedback on this proposal.
 It was developed after discussions on the problem space with Edward Lewis, Jakob
 Schlyter, Johan Stenstam, Steve Crocker, whose contributions where both
 insightful and helpful.
-
 
 {backmatter}
 
